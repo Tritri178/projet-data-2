@@ -5,34 +5,36 @@ import matplotlib.pyplot as plt
 
 # Load the data
 
-path='/Users/meljansevanrensburg/Desktop/3GM/DATA/Projet/winemag-data_first150k.csv'
+path='winemag-data-130k-v2.csv'
 
+print('debug')
 df = pd.read_csv(path)
+
+print(df.keys())
 
 # Extract X (price) and y (points)
 X = df['price'].values
 y = df['points'].values
 
-# Remove any rows where price is NaN (if any)
+# Remove any rows where price is NaN 
 valid_indices = ~np.isnan(X) & ~np.isnan(y)
-X = X[valid_indices]
+x = X[valid_indices]
 y = y[valid_indices]
 
-# Perform linear regression
-slope, intercept, r_value, p_value, std_err = stats.linregress(X, y)
+log_x = np.log(x)
+coefficients = np.polyfit(log_x, y, 1) # returns [b, a]
 
-# Print the results
-print(f"Slope: {slope:.4f}")
-print(f"Intercept: {intercept:.4f}")
-print(f"R-squared: {r_value**2:.4f}")
+b = coefficients[0]
+a = coefficients[1]
 
-# Predict y values using the regression line
-y_pred = intercept + slope * X
+y_fit = a + b * np.log(x)
 
 # Plot the data and regression line
-plt.scatter(X, y, color='blue', label='Data')
+plt.scatter(x, y, color='blue', label='Data')
+plt.scatter(x, y_fit, color='red', label='Regression Line')
 plt.xlabel('Price ($)')
 plt.ylabel('Points')
 plt.title('Linear Regression: Points vs. Price')
 plt.legend()
 plt.show()
+
