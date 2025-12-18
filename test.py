@@ -2,7 +2,9 @@ import numpy as np
 from scipy import stats
 
 
-data = np.genfromtxt('data.csv', delimiter=',', skip_header=1)
+
+
+print('hello')
 
  
 
