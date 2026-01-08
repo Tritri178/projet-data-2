@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # Load the data
 
-path='winemag-data-130k-v2.csv'
+path='data.csv'
 
 print('debug')
 df = pd.read_csv(path)
@@ -34,11 +34,18 @@ plt.scatter(x, y, color='blue', label='Data')
 plt.scatter(x, y_fit, color='red', label='Regression Line')
 plt.xlabel('Price ($)')
 plt.ylabel('Points')
+
+'''
 plt.xlim(left=0)   # set x-axis minimum to 0
 plt.ylim(bottom=0) # set y-axis minimum to 0
-plt.ylim(top=79)  # set y-axis maximum to 100
+plt.ylim(top=100)  # set y-axis maximum to 100
+
+'''
+
 plt.title('Linear Regression: Points vs. Price')
 plt.legend()
 plt.show()
+
+print('finished')
 
 
